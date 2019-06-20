@@ -19,6 +19,14 @@ const database = {
             password: "Excalibur",
             entries: 0,
             joined: new Date()
+        },
+        {
+            id: 124,
+            name: "BB",
+            email: "BB-chan@Kouhai-mail.com",
+            password: "Senpai",
+            entries: 0,
+            joined: new Date()
         }
     ]
 }
