@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParse = require('body-parser');
 
 const app = express();
 
@@ -36,7 +37,12 @@ app.get("/", (req, res) => {
 })
 
 app.post("/signin", (req, res) => {
-    res.json("signin");
+    if (req.body.email === database.users[0].email && 
+        req.body.password === database.users[0].password) {
+            res.json('success!')
+        } else {
+            res.status(400).json("Error logging in");
+        }
 })
 
 app. listen(3000, () => {
