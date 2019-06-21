@@ -23,7 +23,7 @@ const database = {
             joined: new Date()
         },
         {
-            id: 124,
+            id: 125,
             name: "BB",
             email: "BB-chan@Kouhai-mail.com",
             password: "Senpai",
@@ -68,13 +68,22 @@ app.post("/register", (req, res) => {
 app.get('/profile/:id', (req, res) => {
     const { id } = req.params;
     console.log("Holo's id", id);
-    database.users.forEach(user => {
-        if (user.id == id ) {
-            return res.json(user);  
-        } else {
-            res.json('no such user');
+    function loopUsers() {
+        for (i = 0; i < database.users.length; i++) {
+            if (database.users[i].id == id) {
+               return res.json(database.users[i]);
+            }
         }
-    });
+        return res.status(400).json("no such user");
+    }
+    loopUsers(); 
+    // database.users.forEach(user => {
+    //     if (user.id == id ) {
+    //         res.json(user);  
+    //     } else {
+    //         res.status(400).json("no such user");
+    //     }
+    // });
 })
 
 app. listen(3000, () => {
