@@ -63,17 +63,18 @@ app.post("/register", (req, res) => {
         joined: new Date()
     });
     res.json(database.users[database.users.length - 1])
-})
+});
 
-app.get("/profile/:id", (req, res) => {
+app.get('/profile/:id', (req, res) => {
     const { id } = req.params;
-    database.users.forEach((user) => {
-        if (user.id === id) {
-            res.json(user);
+    console.log("Holo's id", id);
+    database.users.forEach(user => {
+        if (user.id == id ) {
+            return res.json(user);  
         } else {
-            res.status(404).json('no such user')
+            res.json('no such user');
         }
-    })
+    });
 })
 
 app. listen(3000, () => {
