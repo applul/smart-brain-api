@@ -30,6 +30,13 @@ const database = {
             entries: 0,
             joined: new Date()
         }
+    ],
+    login: [
+        {
+            id: 987,
+            hash: '',
+            email: 'Holo@Wolf-mail.com',
+        }
     ]
 }
 
@@ -55,7 +62,7 @@ app.post("/signin", (req, res) => {
 app.post("/register", (req, res) => {
     const { email, name, password } = req.body;
     database.users.push({
-        id: 123, 
+        id: 126, 
         name: name,
         email: email,
         password: password,
@@ -73,20 +80,27 @@ app.get('/profile/:id', (req, res) => {
             if (database.users[i].id == id) {
                return res.json(database.users[i]);
             }
-        }
+        } 
         return res.status(400).json("no such user");
     }
     loopUsers(); 
-    // database.users.forEach(user => {
-    //     if (user.id == id ) {
-    //         res.json(user);  
-    //     } else {
-    //         res.status(400).json("no such user");
-    //     }
-    // });
 })
 
-app. listen(3000, () => {
+app.put('/image', (req, res) => {
+    const { id } = req.body;
+    function loopUsers() {
+        for (i = 0; i < database.users.length; i++) {
+            if (database.users[i].id == id) {
+                database.users[i].entries ++;
+               return res.json(database.users[i].entries);
+            }
+        }
+        return res.status(400).json("no such user");
+    }    
+    loopUsers();
+})
+
+app. listen(3000, () => { 
     console.log('app is running on port 3000');
 })
 
